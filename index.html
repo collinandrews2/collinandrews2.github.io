@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Collin Andrews | Data Automation, FinTech & Software Engineering</title>
+  <meta name="description" content="Portfolio of Collin Andrews — Tax Tech & Automation Analyst, Data Engineer, and Computer Science post-baccalaureate student specializing in Python ETL pipelines, AI document extraction, and C++ local AI systems." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0e17;
+      --bg-secondary: #111827;
+      --bg-card: rgba(17, 24, 39, 0.75);
+      --bg-card-hover: rgba(30, 41, 59, 0.85);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-cyan: #38bdf8;
+      --accent-indigo: #818cf8;
+      --accent-violet: #c084fc;
+      --accent-emerald: #34d399;
+      --border-color: rgba(148, 163, 184, 0.14);
+      --border-glow: rgba(56, 189, 248, 0.4);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 35%),
+        radial-gradient(circle at 85% 25%, rgba(129, 140, 248, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 50% 85%, rgba(192, 132, 252, 0.05) 0%, transparent 40%);
+    }
+
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-size: 42px 42px;
+      background-image: 
+        linear-gradient(to right, rgba(148, 163, 184, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.03) 1px, transparent 1px);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: rgba(10, 14, 23, 0.8);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 4.5rem;
+    }
+
+    .brand {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo));
+      box-shadow: 0 0 12px var(--accent-cyan);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-cyan);
+    }
+
+    .btn-nav {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      border: 1px solid var(--border-glow);
+      color: var(--accent-cyan);
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    .btn-nav:hover {
+      background: rgba(56, 189, 248, 0.18);
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.25);
+    }
+
+    .hero {
+      padding: 6rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--accent-emerald);
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      margin-bottom: 1.5rem;
+    }
+
+    .status-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 8px var(--accent-emerald);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(1.15); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-indigo) 50%, var(--accent-violet) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.12rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.6rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo));
+      color: #0a0e17;
+      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(56, 189, 248, 0.38);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.5rem;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent-cyan);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .metric-val {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .metric-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .terminal-card {
+      background: #0d131f;
+      border: 1px solid rgba(129, 140, 248, 0.28);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), 0 0 35px rgba(56, 189, 248, 0.08);
+      font-family: var(--font-mono);
+    }
+
+    .terminal-header {
+      background: #161f33;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot { width: 11px; height: 11px; border-radius: 50%; }
+    .dot-r { background: #ef4444; }
+    .dot-y { background: #f59e0b; }
+    .dot-g { background: #10b981; }
+
+    .terminal-title {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .terminal-body {
+      padding: 1.25rem;
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: #cbd5e1;
+    }
+
+    .code-kw { color: var(--accent-violet); }
+    .code-fn { color: var(--accent-cyan); }
+    .code-str { color: var(--accent-emerald); }
+    .code-comment { color: var(--text-muted); font-style: italic; }
+
+    section {
+      padding: 4.5rem 0;
+    }
+
+    .section-header {
+      margin-bottom: 2.75rem;
+    }
+
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-cyan);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.75rem;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .card:hover {
+      border-color: var(--border-glow);
+      background: var(--bg-card-hover);
+      transform: translateY(-3px);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .role-title {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .company-name {
+      color: var(--accent-cyan);
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .date-badge {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      background: rgba(148, 163, 184, 0.1);
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    .bullet-list {
+      list-style: none;
+      margin-top: 1rem;
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 1.35rem;
+      font-size: 0.94rem;
+      color: var(--text-secondary);
+    }
+
+    .bullet-list li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: var(--accent-cyan);
+      font-family: var(--font-mono);
+    }
+
+    .edu-stack {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .gpa-badge {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--accent-emerald);
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.1rem;
+    }
+
+    .folder-icon {
+      color: var(--accent-cyan);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 8px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .project-links a {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+    }
+
+    .project-links a:hover {
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+    }
+
+    .project-desc {
+      color: var(--text-secondary);
+      font-size: 0.93rem;
+      margin: 0.75rem 0 1.25rem;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.73rem;
+      padding: 0.22rem 0.55rem;
+      border-radius: 5px;
+      background: rgba(129, 140, 248, 0.1);
+      color: #c7d2fe;
+      border: 1px solid rgba(129, 140, 248, 0.2);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .skill-cat-title {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--accent-cyan);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .contact-box {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      background: linear-gradient(180deg, rgba(17, 24, 39, 0.9), rgba(10, 14, 23, 0.95));
+      border: 1px solid var(--border-glow);
+      border-radius: 18px;
+      box-shadow: 0 0 40px rgba(56, 189, 248, 0.08);
+    }
+
+    footer {
+      padding: 2.5rem 0;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      font-family: var(--font-mono);
+    }
+
+    @media (max-width: 860px) {
+      .hero, .split-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero {
+        padding: 3.5rem 0 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <header>
+    <div class="container nav-inner">
+      <a href="#" class="brand">
+        <span class="brand-dot"></span>
+        <span>collinandrews2.github.io</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Tech Stack</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact" class="btn-nav">Get In Touch</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <div class="status-pill">
+          <span class="status-pulse"></span>
+          <span>Tax Tech & Automation Analyst @ AGH | CS Post-Bacc</span>
+        </div>
+        <h1>
+          Bridging Financial Precision with <span class="gradient-text">Intelligent Automation.</span>
+        </h1>
+        <p class="hero-subtitle">
+          Hi, I'm <strong>Collin Andrews</strong> — a data & automation engineer with a B.S. in Accounting and a 4.0 post-baccalaureate track in Computer Science. I build resilient Python ETL pipelines, generative AI document extractors, and local AI systems.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn-primary">Explore Projects &rarr;</a>
+          <a href="https://github.com/collinandrews2" target="_blank" rel="noopener" class="btn-secondary">
+            GitHub (@collinandrews2)
+          </a>
+          <a href="mailto:collinandrews2@gmail.com" class="btn-secondary">
+            collinandrews2@gmail.com
+          </a>
+        </div>
+        <div class="hero-metrics">
+          <div>
+            <div class="metric-val">20%+</div>
+            <div class="metric-label">Workload Reduction via Python ETL</div>
+          </div>
+          <div>
+            <div class="metric-val">4.00</div>
+            <div class="metric-label">CS Post-Bacc GPA (3.97 B.S. Acc)</div>
+          </div>
+          <div>
+            <div class="metric-val">E2E</div>
+            <div class="metric-label">OCR + LLM Document Pipelines</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="terminal-card">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span class="dot dot-r"></span>
+            <span class="dot dot-y"></span>
+            <span class="dot dot-g"></span>
+          </div>
+          <span class="terminal-title">pipeline_engine.py — collin@ubuntu-headless</span>
+        </div>
+        <div class="terminal-body">
+<pre style="white-space: pre-wrap;"><span class="code-comment"># Automated Financial Document &amp; ETL Pipeline</span>
+<span class="code-kw">import</span> pandas <span class="code-kw">as</span> pd
+<span class="code-kw">from</span> google.cloud <span class="code-kw">import</span> documentai
+<span class="code-kw">from</span> gemini_client <span class="code-kw">import</span> StructuredExtractor
+
+<span class="code-kw">class</span> <span class="code-fn">FinancialDataPipeline</span>:
+    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self):
+        self.focus = [
+            <span class="code-str">"Python ETL / ELT Architecture"</span>,
+            <span class="code-str">"GenAI &amp; OCR Document Extraction"</span>,
+            <span class="code-str">"C++ Embeddings &amp; Local AI Models"</span>,
+            <span class="code-str">"Financial &amp; Tax Data Reconciliation"</span>
+        ]
+
+    <span class="code-kw">def</span> <span class="code-fn">transform_and_reconcile</span>(self, pdf_batch):
+        raw_ocr = documentai.process(pdf_batch)
+        structured = StructuredExtractor.parse(raw_ocr)
+        df = pd.DataFrame(structured).validate_schema()
+        <span class="code-kw">return</span> df.export_clean_ledger()</pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="section-header">
+        <span class="section-tag">// 01. Career & Academics</span>
+        <h2 class="section-title">Experience & Education</h2>
+      </div>
+
+      <div class="split-grid">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="role-title">Tax Tech and Automation Analyst</div>
+              <div class="company-name">Allen Gibbs &amp; Houlik LC (AGH) &middot; Overland Park, KS</div>
+            </div>
+            <span class="date-badge">Jan 2026 &ndash; Present</span>
+          </div>
+          <ul class="bullet-list">
+            <li>
+              <strong>ETL/ELT Pipeline Engineering:</strong> Built automated data pipelines using Python and Power Query to ingest, validate, reconcile, and standardize financial and operational data across disparate client systems — cutting manual entry and reducing total project hours on major engagements by <strong>20%</strong>.
+            </li>
+            <li>
+              <strong>Generative AI Backend Integration:</strong> Integrated Google Gemini and generative AI APIs directly into backend data workflows to extract, map, and structure complex data from unstructured financial documents and invoices.
+            </li>
+            <li>
+              <strong>Automated BI &amp; Modeling:</strong> Designed automated data models and executive dashboards to track business performance metrics and significantly compress financial reporting cycles.
+            </li>
+          </ul>
+        </div>
+
+        <div class="edu-stack" id="education">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="role-title">Post-Baccalaureate in Computer Science</div>
+                <div class="company-name">Oakton College &middot; Chicago, IL</div>
+              </div>
+              <span class="date-badge">Jul 2026 &ndash; Present</span>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">
+              <strong>Focus:</strong> Computer Science Foundations, Data Structures using Python 3, Algorithms &amp; Systems.
+            </p>
+            <span class="gpa-badge">Cumulative GPA: 4.00 / 4.00</span>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="role-title">Bachelor of Science in Accounting</div>
+                <div class="company-name">University of Missouri &ndash; Kansas City (UMKC)</div>
+              </div>
+              <span class="date-badge">Graduated May 2026</span>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">
+              <strong>Analytics Coursework:</strong> Advanced Data Analytics, Discrete Structures, Statistical Modeling, JavaScript Programming, Calculus.
+            </p>
+            <span class="gpa-badge">Cumulative GPA: 3.97 / 4.00</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="section-header">
+        <span class="section-tag">// 02. Engineering Portfolio</span>
+        <h2 class="section-title">Featured Technical Projects</h2>
+      </div>
+
+      <div class="projects-grid">
+        <div class="card project-card">
+          <div>
+            <div class="project-top">
+              <span class="folder-icon">OCR + GenAI Pipeline</span>
+              <div class="project-links">
+                <a href="https://github.com/collinandrews2/PDF-Extract" target="_blank" rel="noopener">GitHub Repo &nearr;</a>
+              </div>
+            </div>
+            <h3 class="role-title">PDF-Extract: Financial Document Automation</h3>
+            <p class="project-desc">
+              End-to-end Python pipeline engineered to ingest, extract, and map structured financial data from both scanned and born-digital PDFs. Combines multi-engine OCR with Pandas validation for downstream ERP and ledger integration.
+            </p>
+          </div>
+          <div class="tag-list">
+            <span class="tag">Python 3</span>
+            <span class="tag">Google Document AI</span>
+            <span class="tag">Cloud Vision</span>
+            <span class="tag">Tesseract OCR</span>
+            <span class="tag">Pandas</span>
+          </div>
+        </div>
+
+        <div class="card project-card">
+          <div>
+            <div class="project-top">
+              <span class="folder-icon">Infrastructure &amp; DevOps</span>
+              <div class="project-links">
+                <a href="https://github.com/collinandrews2" target="_blank" rel="noopener">GitHub &nearr;</a>
+              </div>
+            </div>
+            <h3 class="role-title">Headless Ubuntu Home Linux Server</h3>
+            <p class="project-desc">
+              Custom-configured headless Ubuntu server centralizing network file storage, development environments, and automated data-processing jobs. Features Cron + Python backup automation and embedded webhook bots for real-time log monitoring.
+            </p>
+          </div>
+          <div class="tag-list">
+            <span class="tag">Ubuntu Linux</span>
+            <span class="tag">Bash / Cron</span>
+            <span class="tag">Python Automation</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Webhooks</span>
+          </div>
+        </div>
+
+        <div class="card project-card">
+          <div>
+            <div class="project-top">
+              <span class="folder-icon">Local AI &amp; Systems</span>
+              <div class="project-links">
+                <a href="https://github.com/collinandrews2" target="_blank" rel="noopener">Active Lab &nearr;</a>
+              </div>
+            </div>
+            <h3 class="role-title">C++ Embeddings &amp; Local LLM Runtime</h3>
+            <p class="project-desc">
+              Self-directed systems research integrating C++ embedding pipelines with locally hosted AI models for low-latency, privacy-preserving semantic search and document indexing without external API overhead.
+            </p>
+          </div>
+          <div class="tag-list">
+            <span class="tag">C++</span>
+            <span class="tag">Vector Embeddings</span>
+            <span class="tag">Local LLMs</span>
+            <span class="tag">REST APIs</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="section-header">
+        <span class="section-tag">// 03. Capabilities</span>
+        <h2 class="section-title">Technical Stack &amp; Tooling</h2>
+      </div>
+
+      <div class="skills-grid">
+        <div class="card">
+          <div class="skill-cat-title">&gt;_ Languages &amp; Scripting</div>
+          <div class="tag-list" style="border-top: none; padding-top: 0;">
+            <span class="tag">Python 3 (Pandas, NumPy, Pytest)</span>
+            <span class="tag">SQL</span>
+            <span class="tag">C++</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">PowerShell</span>
+            <span class="tag">Bash</span>
+            <span class="tag">Java</span>
+            <span class="tag">VBA</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="skill-cat-title">&gt;_ Data, AI &amp; Systems</div>
+          <div class="tag-list" style="border-top: none; padding-top: 0;">
+            <span class="tag">ETL / ELT Pipeline Design</span>
+            <span class="tag">Google Gemini API</span>
+            <span class="tag">Document AI &amp; OCR</span>
+            <span class="tag">Relational Data Modeling</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Linux (Ubuntu)</span>
+            <span class="tag">REST APIs</span>
+            <span class="tag">Git</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="skill-cat-title">&gt;_ Business Intelligence &amp; Finance</div>
+          <div class="tag-list" style="border-top: none; padding-top: 0;">
+            <span class="tag">Power BI</span>
+            <span class="tag">Tableau</span>
+            <span class="tag">Power Query (M)</span>
+            <span class="tag">Advanced Excel Modeling</span>
+            <span class="tag">Financial Reconciliation</span>
+            <span class="tag">Tax Data Automation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="contact-box">
+        <span class="section-tag">// 04. Let's Connect</span>
+        <h2 class="section-title" style="margin-bottom: 1rem;">Ready to Build &amp; Automate</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+          Whether you're looking to automate complex financial data pipelines, integrate LLMs into enterprise workflows, or collaborate on engineering projects — feel free to reach out.
+        </p>
+        <div class="hero-actions" style="justify-content: center; margin-bottom: 0;">
+          <a href="mailto:collinandrews2@gmail.com" class="btn-primary">Email Collin</a>
+          <a href="https://github.com/collinandrews2" target="_blank" rel="noopener" class="btn-secondary">GitHub Profile</a>
+          <a href="tel:+19132004033" class="btn-secondary">+1 (913) 200-4033</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Designed &amp; Built for Collin Andrews &middot; Hosted on GitHub Pages (collinandrews2.github.io)</p>
+    </div>
+  </footer>
+</body>
+</html>
